@@ -1,11 +1,14 @@
-# Copy the installation script into the container
-COPY install.sh /install_mongo.sh
+# Use an official Docker image that includes Docker and Docker Compose
+FROM docker:latest
 
-# Give execution permissions to the script
-RUN chmod +x /install_mongo.sh
+# Install Docker Compose inside the container
+RUN apk add --no-cache docker-compose
 
-# Run the installation script
-RUN /install_mongo.sh
+# Copy the test.yaml file into the container
+COPY test.yaml /app/test.yaml
 
-# Expose MongoDB port
-EXPOSE 27017
+# Set the working directory
+WORKDIR /app
+
+# Run the Docker Compose file when the container starts
+CMD ["docker-compose", "-f", "test.yaml", "up"]
