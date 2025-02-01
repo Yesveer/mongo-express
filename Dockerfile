@@ -2,7 +2,7 @@
 COPY install.sh /install_mongo.sh
 
 # Give execution permissions to the script
-RUN chmod +x /install.sh
+RUN chmod +x /install_mongo.sh
 
 # Run the installation script
 RUN /install_mongo.sh
