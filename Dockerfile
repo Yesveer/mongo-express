@@ -1,12 +1,11 @@
-# Use an official MongoDB image as the base image
-FROM mongo:latest
+# Copy the installation script into the container
+COPY install.sh /install.sh
 
-# Set environment variables for MongoDB authentication
-ENV MONGO_INITDB_ROOT_USERNAME=admin
-ENV MONGO_INITDB_ROOT_PASSWORD=securepassword
+# Give execution permissions to the script
+RUN chmod +x /install.sh
+
+# Run the installation script
+RUN /install.sh
 
 # Expose MongoDB port
 EXPOSE 27017
-
-# Start MongoDB with authentication
-CMD ["mongod", "--bind_ip_all", "--auth"]
